@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Gw2EndgameCompanion"
+             x:Class="Gw2EndgameCompanion.MainPage">
+
+    <FlyoutItem Title="Home">
+        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Daily">
+        <ShellContent ContentTemplate="{DataTemplate local:DailyPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Daily Fractals">
+        <ShellContent ContentTemplate="{DataTemplate local:FractalPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Daily Strike Mission and DRM">
+        <ShellContent ContentTemplate="{DataTemplate local:StrikePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Raid Events">
+        <ShellContent ContentTemplate="{DataTemplate local:RaidPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Legendary Armory">
+        <ShellContent ContentTemplate="{DataTemplate local:LegendaryPage}" />
+    </FlyoutItem>
+
+</Shell>

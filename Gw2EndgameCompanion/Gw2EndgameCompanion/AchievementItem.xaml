@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gw2EndgameCompanion.AchievementItem"
+             x:Name="_achievement">
+
+    <Grid Margin="5,5" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="67*" />
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Aspect="Fill" WidthRequest="50" HeightRequest="75" Source="{Binding Source={x:Reference _achievement}, Path=Achievement.Icon}" VerticalOptions="Center"/>
+
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Subtitle" Text="{Binding Source={x:Reference _achievement}, Path=Achievement.Name}" FontAttributes="Bold"/>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="12" Text="{Binding Source={x:Reference _achievement}, Path=Achievement.Requirement}"/>
+        </Grid>
+
+
+
+        <Button Grid.Row="0" Grid.Column="2" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="End"  Command="{Binding Source={x:Reference _achievement}, Path=Achievement.WatchCommand}" CommandParameter="{Binding}"  BackgroundColor="#2a2a2e">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference _achievement}, Path=Achievement.OnWatchList}" Value="True">
+                    <Setter Property="Text" Value="❌" />
+                </DataTrigger>
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference _achievement}, Path=Achievement.OnWatchList}" Value="False">
+                    <Setter Property="Text" Value="⭐" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+    </Grid>
+
+</ViewCell>

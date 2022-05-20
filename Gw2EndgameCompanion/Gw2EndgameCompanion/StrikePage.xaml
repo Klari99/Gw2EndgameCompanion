@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Gw2EndgameCompanion"
+             x:Class="Gw2EndgameCompanion.StrikePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Padding="24" CornerRadius="16" Margin="0,-16,0,0">
+                <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Margin="0,10,0,0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Subtitle" Text="Please submit a valid API key to see your currencies related to Icebrood Saga." HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" TextColor="#f0e6e8">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label Margin="0,5,0,5" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Subtitle" Text="Your currencies related to Icebrood Saga:" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" TextColor="#f0e6e8" FontAttributes="Bold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Grid" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Grid.Triggers>
+
+                        <Image Grid.Row="0" Grid.Column="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" Source="{Binding Currencies.RedProphetCrystal.Icon}"/>
+                        <Label Grid.Row="0" Grid.Column="1" TextColor="#f0e6e8" Text="{Binding Currencies.RedProphetCrystal.Value}"/>
+
+                        <Image Grid.Row="0" Grid.Column="2" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" Source="{Binding Currencies.GreenProphetCrystal.Icon}"/>
+                        <Label Grid.Row="0" Grid.Column="3" TextColor="#f0e6e8" Text="{Binding Currencies.GreenProphetCrystal.Value}"/>
+
+                        <Image Grid.Row="1" Grid.Column="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" Source="{Binding Currencies.BlueProphetCrystal.Icon}"/>
+                        <Label Grid.Row="1" Grid.Column="1" TextColor="#f0e6e8" Text="{Binding Currencies.BlueProphetCrystal.Value}"/>
+
+                        <Image Grid.Row="1" Grid.Column="2" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" Source="{Binding Currencies.TyrianDefenseSeal.Icon}"/>
+                        <Label Grid.Row="1" Grid.Column="3" TextColor="#f0e6e8" Text="{Binding Currencies.TyrianDefenseSeal.Value}"/>
+                    </Grid>
+                </Grid>
+            </Frame>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+
+                <Label Padding="0,10,0,10" Grid.Row="0" Text="Daily Strike Mission" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Title" FontAttributes="Bold" TextColor="#2a2a2e"/>
+
+                <ListView Grid.Row="1" RowHeight="100" HasUnevenRows="True" ItemsSource="{Binding DailyStrike}" SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:AchievementItem Achievement="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Padding="0,0,0,10" Grid.Row="2" Text="Daily Dragon Response Missions" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Title" FontAttributes="Bold" TextColor="#2a2a2e"/>
+
+                <ListView Grid.Row="3" RowHeight="100" HasUnevenRows="True" ItemsSource="{Binding DailyDRMs}" SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:AchievementItem Achievement="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

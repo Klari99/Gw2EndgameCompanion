@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gw2EndgameCompanion.RaidEvent"
+             x:Name="_raidEvent">
+
+    <Grid Margin="15,15" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="67*" />
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" Aspect="Fill" WidthRequest="75" HeightRequest="70" Source="{Binding Source={x:Reference _raidEvent}, Path=Event.Icon}" VerticalOptions="Center"/>
+
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Subtitle" FontAttributes="Bold" Text="{Binding Source={x:Reference _raidEvent}, Path=Event.Id}"/>
+
+            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="12">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Type: "/>
+                        <Span Text="{Binding Source={x:Reference _raidEvent}, Path=Event.Type}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="12">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Wing: "/>
+                        <Span Text="{Binding Source={x:Reference _raidEvent}, Path=Event.Wing}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+
+        <Label Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Title">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference _raidEvent}, Path=Event.Done}" Value="False">
+                    <Setter Property="Text" Value="❌"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference _raidEvent}, Path=Event.Done}" Value="True">
+                    <Setter Property="Text" Value="✔️"/>
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+        
+    </Grid>
+</ViewCell>

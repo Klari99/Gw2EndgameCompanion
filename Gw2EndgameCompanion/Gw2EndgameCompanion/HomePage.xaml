@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Gw2EndgameCompanion"
+             x:Class="Gw2EndgameCompanion.HomePage">
+
+    <StackLayout>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Padding="24" CornerRadius="16" Margin="0,-16,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label FontSize="Title" Grid.Row="0" Grid.ColumnSpan="2" Text="Welcome here!" HorizontalOptions="Center" TextColor="#f0e6e8" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label FontSize="Title" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" TextColor="#f0e6e8" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Welcome "/>
+                                <Span Text="{Binding AccountName}"/>
+                                <Span Text="!"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" FontSize="Subtitle" Text="Please submit a valid API key." HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="#f0e6e8">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="#f0e6e8">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Your API key's permissions: "/>
+                                <Span Text="{Binding PermissionsString}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Entry x:Name="_keyEntry" Grid.Row="2" Text="{Binding API_Key, Mode=TwoWay}" ReturnCommand="{Binding SubmitAPIKeyCommand}" Placeholder="xxxxx-xxxx-xxx-xx-x" HorizontalTextAlignment="Center">
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry" Binding="{Binding APISubmitted}" Value="True">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>                    
+                    
+                    <Button x:Name="_submitButton" Text="Submit" Grid.Row="2" Grid.Column="1" Command="{Binding SubmitAPIKeyCommand}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding APISubmitted}" Value="True">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+                    <Button x:Name="_removeAPIKeyButton" Text="Remove API Key" Grid.Row="2" Grid.Column="0" Command="{Binding RemoveAPIKeyCommand}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding APISubmitted}" Value="False">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    
+                </Grid>
+            </Frame>
+
+        </Grid>
+
+        <ListView Grid.Row="1" RowHeight="100" ItemsSource="{Binding WatchList}" SelectionMode="None" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:AchievementItem Achievement="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentPage>
